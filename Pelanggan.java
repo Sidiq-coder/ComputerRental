@@ -1,9 +1,14 @@
 public class Pelanggan {
-    private String idPelanggan;
+    private int idPelanggan;
     private String nama;
-    private String tipeAkun;
     private String noTelepon;
 
+    public Pelanggan(int idPelanggan, String nama, String noTelepon){
+        this.idPelanggan = idPelanggan;
+        this.nama = nama;
+        this.noTelepon = noTelepon;
+    }
+    
     public void login() {
         System.out.println(nama + " telah login.");
     }
@@ -13,16 +18,14 @@ public class Pelanggan {
     }
 
     public void tampilInfo() {
-        System.out.println("ID: " + idPelanggan + ", Nama: " + nama + ", Tipe Akun: " + tipeAkun);
+        System.out.println("ID: " + idPelanggan + ", Nama: " + nama + ", Tipe Akun: " );
     }
 
     // Getters and Setters
-    public String getIdPelanggan() { return idPelanggan; }
-    public void setIdPelanggan(String idPelanggan) { this.idPelanggan = idPelanggan; }
+    public int getIdPelanggan() { return idPelanggan; }
+    public void setIdPelanggan(int idPelanggan) { this.idPelanggan = idPelanggan; }
     public String getNama() { return nama; }
     public void setNama(String nama) { this.nama = nama; }
-    public String getTipeAkun() { return tipeAkun; }
-    public void setTipeAkun(String tipeAkun) { this.tipeAkun = tipeAkun; }
     public String getNoTelepon() { return noTelepon; }
     public void setNoTelepon(String noTelepon) { this.noTelepon = noTelepon; }
 }

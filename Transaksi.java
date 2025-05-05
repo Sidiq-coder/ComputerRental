@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
 public class Transaksi {
-    private String idTransaksi;
+    private int idTransaksi;
     private Pelanggan pelanggan;
     private Komputer komputer;
     private LocalDateTime waktuMulai;
@@ -9,7 +9,7 @@ public class Transaksi {
     private double tarifPerJam = 5000;
     private double totalBayar;
 
-    public Transaksi(String id, Pelanggan p, Komputer k, LocalDateTime mulai) {
+    public Transaksi(int id, Pelanggan p, Komputer k, LocalDateTime mulai) {
         this.idTransaksi = id;
         this.pelanggan = p;
         this.komputer = k;
@@ -36,8 +36,8 @@ public class Transaksi {
     }
 
     // Getters and Setters
-    public String getIdTransaksi() { return idTransaksi; }
-    public void setIdTransaksi(String idTransaksi) { this.idTransaksi = idTransaksi; }
+    public int getIdTransaksi() { return idTransaksi; }
+    public void setIdTransaksi(int idTransaksi) { this.idTransaksi = idTransaksi; }
     public Pelanggan getPelanggan() { return pelanggan; }
     public void setPelanggan(Pelanggan pelanggan) { this.pelanggan = pelanggan; }
     public Komputer getKomputer() { return komputer; }
