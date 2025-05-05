@@ -1,30 +1,89 @@
-# ComputerRental
-1. Anggota 1 – Class Komputer
-Deskripsi: Merepresentasikan data komputer yang tersedia untuk disewa.
-Atribut: idKomputer, merk, spesifikasi, hargaPerJam, status
-Method: tampilkanInfo(), setStatus(boolean tersedia)
+✅ 1. Class Komputer
+Atribut:
+idKomputer : String
+nomorKomputer : int
+status : String (contoh: "KOSONG", "AKTIF", "MAINTENANCE")
+durasiPenggunaan : int (dalam menit)
+pelangganAktif : Pelanggan
+Method:
+aktifkan(Pelanggan pelanggan)
+matikan()
+setStatus(String status)
+getStatus()
+hitungDurasi(LocalDateTime mulai, LocalDateTime selesai) : int
 
-2. Anggota 2 – Class Pelanggan
-Deskripsi: Menyimpan informasi pelanggan yang melakukan penyewaan.
-Atribut: idPelanggan, nama, alamat, noTelepon
-Method: tampilkanDataPelanggan()
+✅ 2. Class Pelanggan
+Atribut:
+idPelanggan : String
+nama : String
+tipeAkun : String (contoh: "MEMBER", "NON_MEMBER")
+noTelepon : String
+Method:
+login()
+logout()
+tampilInfo()
 
-3. Anggota 3 – Class Transaksi
-Deskripsi: Mengelola proses penyewaan komputer.
-Atribut: idTransaksi, pelanggan, komputer, waktuMulai, waktuSelesai, totalBayar
-Method: hitungTotal(), tampilkanDetailTransaksi()
+✅ 3. Class Operator
+Atribut:
+idOperator : String
+nama : String
+username : String
+password : String
+Method:
+login(String username, String password)
+monitorKomputer(List<Komputer> komputerList)
+prosesTransaksi(Pelanggan p, Komputer k)
 
-4. Anggota 4 – Class Admin
-Deskripsi: Mengelola komputer dan pelanggan (CRUD data).
-Atribut: idAdmin, username, password
-Method: tambahKomputer(), hapusKomputer(), tambahPelanggan(), hapusPelanggan()
+✅ 4. Class Transaksi
+Atribut:
+idTransaksi : String
+pelanggan : Pelanggan
+komputer : Komputer
+waktuMulai : LocalDateTime
+waktuSelesai : LocalDateTime
+totalDurasi : int
+tarifPerJam : double
+totalBayar : double
 
-5. Anggota 5 – Class Pembayaran
-Deskripsi: Menangani pembayaran sewa komputer.
-Atribut: idPembayaran, transaksi, metodePembayaran, statusPembayaran
-Method: prosesPembayaran(), tampilkanStruk()
+Method:
+hitungDurasi() : int
+hitungTotalBayar() : double
+cetakStruk()
 
-6. Anggota 6 – Class RentalApp (Main Class)
-Deskripsi: Menjalankan aplikasi, menyediakan menu utama.
-Tugas: Menghubungkan semua class, input/output pengguna.
-Method: main(), menuUtama()
+✅ 5. Class Member
+Atribut:
+idMember : String
+pelanggan : Pelanggan
+tanggalDaftar : LocalDate
+tanggalKadaluarsa : LocalDate
+saldo : double
+
+Method:
+cekAktif() : boolean
+isiSaldo(double nominal)
+potongSaldo(double nominal)
+
+✅ 6. Class Main
+Atribut:
+(Biasanya class Main tidak memiliki atribut, tapi digunakan untuk mengeksekusi program)
+Method:
+main(String[] args)
+menuUtama()
+prosesLoginOperator()
+prosesLoginPelanggan()
+mulaiSesi()
+akhiriSesi()
+
+✅ 7. Class Laporan
+Atribut:
+idLaporan : String
+periodeAwal : LocalDate
+periodeAkhir : LocalDate
+daftarTransaksi : List<Transaksi>
+totalPendapatan : double
+
+Method:
+generateLaporan()
+tampilkanRingkasan()
+cetakLaporan()
+
