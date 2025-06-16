@@ -217,7 +217,7 @@ public class GUI extends JFrame {
             data[i][1] = String.valueOf(k.getNomorKomputer());
             data[i][2] = k.getStatus();
             data[i][3] = k.getPengguna() != null ? k.getPengguna().getNama() : "-";
-            data[i][3] = k.getPengguna() != null ? k.getPengguna().getNoTelepon() : "-";
+            data[i][4] = k.getPengguna() != null ? k.getPengguna().getNoTelepon() : "-";
         }
 
         tableKomputer = new JTable(new DefaultTableModel(data, columnNames));
