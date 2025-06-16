@@ -1,12 +1,20 @@
 import java.time.LocalDateTime;
 import java.time.Duration;
-
 public class Komputer {
-    private String idKomputer;
+    private int idKomputer;
     private int nomorKomputer;
     private String status;
     private int durasiPenggunaan;
     private Pelanggan pelangganAktif;
+
+    public Komputer(int idKomputer, int nomorKomputer) {
+        this.idKomputer = idKomputer;
+        this.nomorKomputer = nomorKomputer;
+        this.status = "KOSONG"; // default saat dibuat
+        this.durasiPenggunaan = 0;
+        this.pelangganAktif = null;
+    }
+    
 
     public void aktifkan(Pelanggan pelanggan) {
         this.pelangganAktif = pelanggan;
@@ -34,8 +42,8 @@ public class Komputer {
     }
 
     // Getters and Setters
-    public String getIdKomputer() { return idKomputer; }
-    public void setIdKomputer(String idKomputer) { this.idKomputer = idKomputer; }
+    public int getIdKomputer() { return idKomputer; }
+    public void setIdKomputer(int idKomputer) { this.idKomputer = idKomputer; }
     public int getNomorKomputer() { return nomorKomputer; }
     public void setNomorKomputer(int nomorKomputer) { this.nomorKomputer = nomorKomputer; }
     public int getDurasiPenggunaan() { return durasiPenggunaan; }
