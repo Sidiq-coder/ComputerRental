@@ -2,6 +2,7 @@ public class Pelanggan {
     private int idPelanggan;
     private String nama;
     private String noTelepon;
+    private java.time.LocalDateTime waktuMulai; 
 
     public Pelanggan(int idPelanggan, String nama, String noTelepon){
         this.idPelanggan = idPelanggan;
@@ -28,4 +29,9 @@ public class Pelanggan {
     public void setNama(String nama) { this.nama = nama; }
     public String getNoTelepon() { return noTelepon; }
     public void setNoTelepon(String noTelepon) { this.noTelepon = noTelepon; }
+     public java.time.LocalDateTime getWaktuMulai() {return waktuMulai;}
+
+    public void setWaktuMulai(java.time.LocalDateTime waktuMulai) {
+        this.waktuMulai = waktuMulai;
+    }
 }

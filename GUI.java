@@ -184,25 +184,58 @@ public class GUI extends JFrame {
         String[] opsi = {"Tambah Operator", "Tambah Komputer", "Tambah Pelanggan"};
         String pilihan = (String) JOptionPane.showInputDialog(this, "Pilih Data yang Ingin Ditambah:", "Tambah Data", JOptionPane.QUESTION_MESSAGE, null, opsi, opsi[0]);
 
+        if (pilihan == null) return;
+
         switch (pilihan) {
             case "Tambah Operator":
-                String namaOp = JOptionPane.showInputDialog("Nama:");
-                String userOp = JOptionPane.showInputDialog("Username:");
-                String passOp = JOptionPane.showInputDialog("Password:");
-                Main.getOperatorList().add(new Operator(Main.generateId(), namaOp, userOp, passOp));
+                try {
+                    String namaOp = JOptionPane.showInputDialog(this, "Nama:");
+                    if (namaOp == null || namaOp.trim().isEmpty()) throw new Exception("Nama tidak boleh kosong.");
+                    String userOp = JOptionPane.showInputDialog(this, "Username:");
+                    if (userOp == null || userOp.trim().isEmpty()) throw new Exception("Username tidak boleh kosong.");
+                    String passOp = JOptionPane.showInputDialog(this, "Password:");
+                    if (passOp == null || passOp.trim().isEmpty()) throw new Exception("Password tidak boleh kosong.");
+                    Main.getOperatorList().add(new Operator(Main.generateId(), namaOp, userOp, passOp));
+                    JOptionPane.showMessageDialog(this, "Operator berhasil ditambahkan.");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Gagal menambah operator: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             case "Tambah Komputer":
-                int nomor = Integer.parseInt(JOptionPane.showInputDialog("Nomor Komputer:"));
-                Main.getKomputerList().add(new Komputer(Main.generateId(), nomor));
+                try {
+                    String nomorStr = JOptionPane.showInputDialog(this, "Nomor Komputer:");
+                    if (nomorStr == null || nomorStr.trim().isEmpty()) throw new Exception("Nomor komputer tidak boleh kosong.");
+                    int nomor;
+                    try {
+                        nomor = Integer.parseInt(nomorStr.trim());
+                    } catch (NumberFormatException e) {
+                        throw new Exception("Nomor komputer harus berupa angka!");
+                    }
+                    // Cek duplikasi nomor komputer
+                    for (Komputer k : Main.getKomputerList()) {
+                        if (k.getNomorKomputer() == nomor) {
+                            throw new Exception("Nomor komputer sudah terdaftar!");
+                        }
+                    }
+                    Main.getKomputerList().add(new Komputer(Main.getKomputerList().size() + 1, nomor));
+                    JOptionPane.showMessageDialog(this, "Komputer berhasil ditambahkan dengan Nomor: " + nomor);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Gagal menambah komputer: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             case "Tambah Pelanggan":
-                String namaP = JOptionPane.showInputDialog("Nama Pelanggan:");
-                String telp = JOptionPane.showInputDialog("No Telepon:");
-                Main.getPelangganList().add(new Pelanggan(Main.generateId(), namaP, telp));
+                try {
+                    String namaP = JOptionPane.showInputDialog(this, "Nama Pelanggan:");
+                    if (namaP == null || namaP.trim().isEmpty()) throw new Exception("Nama pelanggan tidak boleh kosong.");
+                    String telp = JOptionPane.showInputDialog(this, "No Telepon:");
+                    if (telp == null || telp.trim().isEmpty()) throw new Exception("No telepon tidak boleh kosong.");
+                    Main.getPelangganList().add(new Pelanggan(Main.generateId(), namaP, telp));
+                    JOptionPane.showMessageDialog(this, "Pelanggan berhasil ditambahkan.");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Gagal menambah pelanggan: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
         }
-
-        JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan.");
     }
 
     private void tampilkanDataKomputer() {
@@ -232,7 +265,15 @@ public class GUI extends JFrame {
         laporan.setDaftarTransaksi(Main.getTransaksiList());
         laporan.generateLaporan();
 
-        JTextArea laporanArea = new JTextArea(laporan.getIsiLaporan());
+        // Akumulasi total semua transaksi
+        double totalSemua = 0;
+        for (Transaksi t : Main.getTransaksiList()) {
+            totalSemua += t.hitungTotalBayar();
+        }
+
+        String isiLaporan = laporan.getIsiLaporan() + "\n\nTotal Pendapatan: Rp" + totalSemua;
+
+        JTextArea laporanArea = new JTextArea(isiLaporan);
         laporanArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(laporanArea);
         scrollPane.setPreferredSize(new Dimension(600, 400));
