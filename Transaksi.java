@@ -23,8 +23,8 @@ public class Transaksi {
     }
 
     public double hitungTotalBayar() {
-        double menit = totalDurasi / 60.0;
-        this.totalBayar = tarifPerJam * menit;
+        double jam = totalDurasi / 60.0;
+        this.totalBayar = tarifPerJam * jam;
         return totalBayar;
     }
 
@@ -33,6 +33,16 @@ public class Transaksi {
         System.out.println("Pelanggan: " + pelanggan.getNama());
         System.out.println("Durasi: " + totalDurasi + " menit");
         System.out.println("Total Bayar: Rp" + totalBayar);
+    }
+    
+    @Override
+    public String toString() {
+    return "ID: " + idTransaksi +
+           ", Pelanggan: " + pelanggan.getNama() +
+           ", Komputer: " + komputer.getNomorKomputer() +
+           ", Mulai: " + waktuMulai +
+           ", Selesai: " + (waktuSelesai != null ? waktuSelesai : "Belum selesai") +
+           ", Total: Rp" + totalBayar;
     }
 
     // Getters and Setters

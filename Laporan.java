@@ -38,4 +38,13 @@ public class Laporan {
     public void setDaftarTransaksi(List<Transaksi> daftarTransaksi) { this.daftarTransaksi = daftarTransaksi; }
     public double getTotalPendapatan() { return totalPendapatan; }
     public void setTotalPendapatan(double totalPendapatan) { this.totalPendapatan = totalPendapatan; }
+    public String getIsiLaporan() {
+    StringBuilder sb = new StringBuilder();
+    for (Transaksi t : daftarTransaksi) {
+        sb.append(t.toString()).append("\n");
+    }
+    return sb.toString();
+}
+
+
 }

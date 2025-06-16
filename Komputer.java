@@ -50,4 +50,7 @@ public class Komputer {
     public void setDurasiPenggunaan(int durasiPenggunaan) { this.durasiPenggunaan = durasiPenggunaan; }
     public Pelanggan getPelangganAktif() { return pelangganAktif; }
     public void setPelangganAktif(Pelanggan pelangganAktif) { this.pelangganAktif = pelangganAktif; }
+    public Pelanggan getPengguna() {return pelangganAktif;
+}
+
 }
