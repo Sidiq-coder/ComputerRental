@@ -6,11 +6,12 @@ public class Komputer {
     private String status;
     private int durasiPenggunaan;
     private Pelanggan pelangganAktif;
+    private LocalDateTime waktuMulai; 
 
     public Komputer(int idKomputer, int nomorKomputer) {
         this.idKomputer = idKomputer;
         this.nomorKomputer = nomorKomputer;
-        this.status = "KOSONG"; // default saat dibuat
+        this.status = "KOSONG"; 
         this.durasiPenggunaan = 0;
         this.pelangganAktif = null;
     }
@@ -19,12 +20,14 @@ public class Komputer {
     public void aktifkan(Pelanggan pelanggan) {
         this.pelangganAktif = pelanggan;
         this.status = "AKTIF";
+        this.waktuMulai = LocalDateTime.now(); 
     }
 
     public void matikan() {
         this.pelangganAktif = null;
         this.status = "KOSONG";
         this.durasiPenggunaan = 0;
+        this.waktuMulai = null; 
     }
 
     public void setStatus(String status) {
@@ -50,7 +53,6 @@ public class Komputer {
     public void setDurasiPenggunaan(int durasiPenggunaan) { this.durasiPenggunaan = durasiPenggunaan; }
     public Pelanggan getPelangganAktif() { return pelangganAktif; }
     public void setPelangganAktif(Pelanggan pelangganAktif) { this.pelangganAktif = pelangganAktif; }
-    public Pelanggan getPengguna() {return pelangganAktif;
-}
-
+    public Pelanggan getPengguna() {return pelangganAktif;}
+    public LocalDateTime getWaktuMulai() {return waktuMulai;}
 }

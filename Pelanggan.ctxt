@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=Pelanggan
+comment1.params=idPelanggan\ nama\ noTelepon
+comment1.target=Pelanggan(int,\ java.lang.String,\ java.lang.String)
+comment10.params=noTelepon
+comment10.target=void\ setNoTelepon(java.lang.String)
+comment11.params=
+comment11.target=java.time.LocalDateTime\ getWaktuMulai()
+comment12.params=waktuMulai
+comment12.target=void\ setWaktuMulai(java.time.LocalDateTime)
+comment2.params=
+comment2.target=void\ login()
+comment3.params=
+comment3.target=void\ logout()
+comment4.params=
+comment4.target=void\ tampilInfo()
+comment5.params=
+comment5.target=int\ getIdPelanggan()
+comment6.params=idPelanggan
+comment6.target=void\ setIdPelanggan(int)
+comment7.params=
+comment7.target=java.lang.String\ getNama()
+comment8.params=nama
+comment8.target=void\ setNama(java.lang.String)
+comment9.params=
+comment9.target=java.lang.String\ getNoTelepon()
+numComments=13
