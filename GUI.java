@@ -18,30 +18,51 @@ public class GUI extends JFrame {
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        
         initLoginPanel();
         setVisible(true);
     }
 
     private void initLoginPanel() {
-        panelLogin = new JPanel(new GridLayout(4, 2, 10, 10));
-        panelLogin.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+        panelLogin = new JPanel();
+        panelLogin.setLayout(new BoxLayout(panelLogin, BoxLayout.Y_AXIS));
+        panelLogin.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
+        panelLogin.setBackground(Color.WHITE);
 
-        panelLogin.add(new JLabel("Username:"));
-        txtUsername = new JTextField();
-        panelLogin.add(txtUsername);
+        JLabel lblTitle = new JLabel("Login Operator");
+        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        panelLogin.add(new JLabel("Password:"));
-        txtPassword = new JPasswordField();
-        panelLogin.add(txtPassword);
+        JLabel lblUsername = new JLabel("Username:");
+        txtUsername = new JTextField(15);
+        JLabel lblPassword = new JLabel("Password:");
+        txtPassword = new JPasswordField(15);
+
+        JPanel panelFields = new JPanel();
+        panelFields.setLayout(new GridLayout(2, 2, 10, 10));
+        panelFields.setOpaque(false);
+        panelFields.add(lblUsername);
+        panelFields.add(txtUsername);
+        panelFields.add(lblPassword);
+        panelFields.add(txtPassword);
 
         JButton btnLogin = new JButton("Login");
-        panelLogin.add(btnLogin);
-
         JButton btnExit = new JButton("Keluar");
-        panelLogin.add(btnExit);
+        btnLogin.setPreferredSize(new Dimension(100, 36));
+        btnExit.setPreferredSize(new Dimension(100, 36));
 
-        add(panelLogin);
+        JPanel panelButtons = new JPanel();
+        panelButtons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
+        panelButtons.setOpaque(false);
+        panelButtons.add(btnLogin);
+        panelButtons.add(btnExit);
+
+        panelLogin.add(lblTitle);
+        panelLogin.add(Box.createVerticalStrut(25));
+        panelLogin.add(panelFields);
+        panelLogin.add(Box.createVerticalStrut(15));
+        panelLogin.add(panelButtons);
+
+        setContentPane(panelLogin);
 
         btnLogin.addActionListener(e -> prosesLogin());
         btnExit.addActionListener(e -> System.exit(0));
@@ -66,46 +87,51 @@ public class GUI extends JFrame {
         getContentPane().removeAll();
         setTitle("Sistem Warnet - Menu Operator");
 
-        panelMenu = new JPanel();
-        panelMenu.setLayout(new BorderLayout());
+        panelMenu = new JPanel(new BorderLayout(10, 10));
+        panelMenu.setBorder(BorderFactory.createEmptyBorder(25, 40, 25, 40));
+        panelMenu.setBackground(Color.WHITE);
 
-        JPanel panelButtons = new JPanel(new GridLayout(3, 3, 10, 10));
-        panelButtons.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JLabel lblMenu = new JLabel("Menu Operator");
+        lblMenu.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JButton btnMonitorKomputer = new JButton("Monitor Komputer");
-        JButton btnCetakLaporan = new JButton("Cetak Laporan");
-        JButton btnLogout = new JButton("Logout");
-        JButton btnMulaiSesi = new JButton("Mulai Sesi");
-        JButton btnAkhiriSesi = new JButton("Akhiri Sesi");
-        JButton btnTambahData = new JButton("Tambah Data");
+        JPanel panelButtons = new JPanel(new GridBagLayout());
+        panelButtons.setOpaque(false);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 15, 10, 15);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
 
-        panelButtons.add(btnMonitorKomputer);
-        panelButtons.add(btnMulaiSesi);
-        panelButtons.add(btnAkhiriSesi);
-        panelButtons.add(btnTambahData);
-        panelButtons.add(btnCetakLaporan);
-        panelButtons.add(btnLogout);
-        
-        textAreaOutput = new JTextArea(10, 30);
-        textAreaOutput.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(textAreaOutput);
+        String[] btnNames = {
+            "Monitor Komputer", "Tambah Data", "Mulai Sesi",
+            "Akhiri sesi", "Cetak Laporan", "Logout"
+        };
+        JButton[] buttons = new JButton[btnNames.length];
+        for (int i = 0; i < btnNames.length; i++) {
+            buttons[i] = new JButton(btnNames[i]);
+            buttons[i].setFont(new Font("Segoe UI", Font.PLAIN, 15));
+            buttons[i].setPreferredSize(new Dimension(180, 38));
+            gbc.gridx = i % 2;
+            gbc.gridy = i / 2;
+            panelButtons.add(buttons[i], gbc);
+        }
 
-        panelMenu.add(panelButtons, BorderLayout.NORTH);
-        panelMenu.add(scrollPane, BorderLayout.CENTER);
+        // Assign actions
+        buttons[0].addActionListener(e -> tampilkanDataKomputer());
+        buttons[1].addActionListener(e -> tambahData());
+        buttons[2].addActionListener(e -> mulaiSesi());
+        buttons[3].addActionListener(e -> akhiriSesi());
+        buttons[4].addActionListener(e -> cetakLaporan());
+        buttons[5].addActionListener(e -> logout());
 
-        add(panelMenu);
+        panelMenu.add(lblMenu, BorderLayout.NORTH);
+        panelMenu.add(panelButtons, BorderLayout.CENTER);
+
+        setContentPane(panelMenu);
         revalidate();
         repaint();
-
-        btnMonitorKomputer.addActionListener(e -> tampilkanDataKomputer());
-        btnCetakLaporan.addActionListener(e -> cetakLaporan());
-        btnLogout.addActionListener(e -> logout());
-        btnMulaiSesi.addActionListener(e -> mulaiSesi());
-        btnAkhiriSesi.addActionListener(e -> akhiriSesi());
-        btnTambahData.addActionListener(e -> tambahData());
     }
-    
-    
+
     private void mulaiSesi() {
         List<Komputer> komputerList = Main.getKomputerList();
         List<Pelanggan> pelangganList = Main.getPelangganList();
@@ -117,9 +143,8 @@ public class GUI extends JFrame {
 
         String[] pelangganOptions = pelangganList.stream().map(Pelanggan::getNama).toArray(String[]::new);
         String namaPelanggan = (String) JOptionPane.showInputDialog(this, "Pilih Pelanggan:", "Mulai Sesi", JOptionPane.QUESTION_MESSAGE, null, pelangganOptions, pelangganOptions[0]);
-    
+
         Pelanggan selectedPelanggan = pelangganList.stream().filter(p -> p.getNama().equals(namaPelanggan)).findFirst().orElse(null);
-    
         String nomorKomputer = JOptionPane.showInputDialog(this, "Masukkan Nomor Komputer:");
 
         for (Komputer k : komputerList) {
@@ -132,7 +157,7 @@ public class GUI extends JFrame {
         }
 
         JOptionPane.showMessageDialog(this, "Komputer tidak tersedia atau nomor salah.");
-        }
+    }
 
     private void akhiriSesi() {
         List<Transaksi> transaksiList = Main.getTransaksiList();
@@ -154,7 +179,7 @@ public class GUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Durasi: " + durasi + " menit\nTotal Bayar: Rp" + bayar);
         }
     }
-    
+
     private void tambahData() {
         String[] opsi = {"Tambah Operator", "Tambah Komputer", "Tambah Pelanggan"};
         String pilihan = (String) JOptionPane.showInputDialog(this, "Pilih Data yang Ingin Ditambah:", "Tambah Data", JOptionPane.QUESTION_MESSAGE, null, opsi, opsi[0]);
@@ -180,13 +205,11 @@ public class GUI extends JFrame {
         JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan.");
     }
 
-
-
     private void tampilkanDataKomputer() {
         List<Komputer> list = Main.getKomputerList();
 
-        String[] columnNames = {"ID", "Nomor Komputer", "Status", "Nama Pengguna"};
-        String[][] data = new String[list.size()][4];
+        String[] columnNames = {"ID", "Nomor Komputer", "Status", "Nama Pengguna", "No HP"};
+        String[][] data = new String[list.size()][5];
 
         for (int i = 0; i < list.size(); i++) {
             Komputer k = list.get(i);
@@ -194,6 +217,7 @@ public class GUI extends JFrame {
             data[i][1] = String.valueOf(k.getNomorKomputer());
             data[i][2] = k.getStatus();
             data[i][3] = k.getPengguna() != null ? k.getPengguna().getNama() : "-";
+            data[i][3] = k.getPengguna() != null ? k.getPengguna().getNoTelepon() : "-";
         }
 
         tableKomputer = new JTable(new DefaultTableModel(data, columnNames));
@@ -207,15 +231,12 @@ public class GUI extends JFrame {
         laporan.setPeriodeAkhir(java.time.LocalDate.now());
         laporan.setDaftarTransaksi(Main.getTransaksiList());
         laporan.generateLaporan();
-    
-        // Ubah daftar transaksi menjadi String
-        String isiLaporan = laporan.getIsiLaporan();
-    
-        JTextArea laporanArea = new JTextArea(isiLaporan);
+
+        JTextArea laporanArea = new JTextArea(laporan.getIsiLaporan());
         laporanArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(laporanArea);
         scrollPane.setPreferredSize(new Dimension(600, 400));
-    
+
         JOptionPane.showMessageDialog(this, scrollPane, "Laporan Mingguan", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -228,7 +249,6 @@ public class GUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        // Menambahkan akun default agar bisa login
         Main.addAll(new Operator(1, "Admin", "admin", "admin123"));
         SwingUtilities.invokeLater(GUI::new);
     }
