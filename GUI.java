@@ -123,7 +123,7 @@ public class GUI extends JFrame {
         String nomorKomputer = JOptionPane.showInputDialog(this, "Masukkan Nomor Komputer:");
 
         for (Komputer k : komputerList) {
-            if (String.valueOf(k.getNomorKomputer()).equals(nomorKomputer) && k.getStatus().equals("Tersedia")) {
+            if (String.valueOf(k.getNomorKomputer()).equals(nomorKomputer) && k.getStatus().equals("KOSONG")) {
                 Transaksi t = currentOperator.prosesTransaksi(selectedPelanggan, k);
                 Main.getTransaksiList().add(t);
                 JOptionPane.showMessageDialog(this, "Sesi dimulai untuk Komputer " + nomorKomputer);

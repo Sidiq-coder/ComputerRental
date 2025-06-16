@@ -202,16 +202,34 @@ public class Main {
             return;
         }
 
-        Komputer komputerKosong = null;
+        // Tampilkan daftar komputer kosong
+        System.out.println("Daftar Komputer Tersedia:");
+        boolean adaKosong = false;
         for (Komputer k : komputerList) {
             if (k.getStatus().equals("KOSONG")) {
+                System.out.println("- Nomor Komputer: " + k.getNomorKomputer());
+                adaKosong = true;
+            }
+        }
+        if (!adaKosong) {
+            System.out.println("Tidak ada komputer yang tersedia saat ini.");
+            return;
+        }
+
+        System.out.print("Masukkan nomor komputer yang ingin digunakan: ");
+        int nomorKomputer = scanner.nextInt();
+        scanner.nextLine();
+
+        Komputer komputerKosong = null;
+        for (Komputer k : komputerList) {
+            if (k.getNomorKomputer() == nomorKomputer && k.getStatus().equals("KOSONG")) {
                 komputerKosong = k;
                 break;
             }
         }
 
         if (komputerKosong == null) {
-            System.out.println("Tidak ada komputer yang tersedia saat ini.");
+            System.out.println("Komputer tidak tersedia atau nomor salah.");
             return;
         }
 
