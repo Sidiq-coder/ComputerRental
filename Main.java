@@ -16,17 +16,15 @@ public class Main {
         menuUtama();
     }
     
-     public static void addAll(Operator o) {
+    public static void addAll(Operator o) {
         operatorList.add(o);
     }
-
-    
 
     public static void menuUtama() {
         Scanner scanner = new Scanner(System.in);
         int pilihan;
         do {
-            System.out.println("\n=== MENU UTAMA ===");
+            System.out.println("\n=== MENU UTAMA ==="); 
             System.out.println("1. Login sebagai Operator");
             System.out.println("2. Keluar");
             System.out.print("Pilih menu: ");
@@ -278,7 +276,7 @@ public class Main {
         laporan.generateLaporan();
         laporan.cetakLaporan();
     } 
-    
+        
     public static int generateId() {return (int) System.currentTimeMillis();}
     public static List<Komputer> getKomputerList() {return komputerList;}
     public static List<Transaksi> getTransaksiList() {return transaksiList;}

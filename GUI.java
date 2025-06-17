@@ -282,7 +282,7 @@ public class GUI extends JFrame {
     }
 
     private void logout() {
-        currentOperator = null;
+        currentOperator = null; 
         getContentPane().removeAll();
         initLoginPanel();
         revalidate();
